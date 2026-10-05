@@ -1,5 +1,3 @@
-Drive link to the data : https://uofi.box.com/s/fpp406rr0o8b0sfplw7gox055umfgvjh
-
 Folders in Repo: \
 01 : First script to set the system all NoseHoover  \
 02 : First set of runs at GSEG_CC. Rho = 0.3, T = [0.1, ...,3.0] \
