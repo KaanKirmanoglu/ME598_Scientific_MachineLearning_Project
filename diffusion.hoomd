@@ -1,0 +1,117 @@
+import numpy as np
+import sys, os
+import hoomd
+import hoomd.md
+import gsd.hoomd
+from DiffusionHandler import DiffusionHandler
+import argparse
+import time
+import gc
+import datetime
+
+"""
+October 7 2022
+
+First version
+"""
+
+
+parser = argparse.ArgumentParser(description="Basic run")
+non_opt = parser.add_argument_group("mandatory arguments")
+non_opt.add_argument('--rho', metavar="<float>", type=float, dest="rho", required=True, help="# density" )
+non_opt.add_argument('--kT', metavar="<float>", type=float, dest="kT", required=True, help="kT" )
+# non_opt.add_argument('-o', '--output', metavar="<dat>", type=str, dest="output", required=True, help=" a .gsd file " )
+# non_opt.add_argument('-g', '--gpu', metavar="<int>", type=int, dest="gpu_id", required=False, help="0 or 1. 2 for using both",default=0 )
+#
+args = parser.parse_args()
+rho = args.rho
+kT = args.kT
+
+output = "rho%.2f_kt%.2f" %(rho,kT)
+
+"""
+Type Eu : Tracer (A)
+Type Gd : Solvent (B)
+Input Parameters
+"""
+
+L = 20.0
+d1 = 4.0
+
+dump_period = 1e1
+log_period = 1e1
+run_steps = 1e6
+dt = 0.005
+tau = 1.0
+notice_level = 2
+"""
+End of Parameters
+"""
+
+now = datetime.datetime.now()
+current_script_name = sys.argv[0]
+print("Script Running  :  %s" %current_script_name)
+print("****************************** Script Content **********************************************")
+with open(current_script_name, "r") as f:
+    count = 0
+    while True:
+        count += 1
+        line = f.readline()
+        if not line:
+            break
+        print(line.strip())
+
+print("****************************** Script Content Ends  **********************************************")
+
+
+time_start = time.time()
+# context_initialize_str = "--gpu=" + str(gpu_id)
+# hoomd.context.initialize(context_initialize_str)
+hoomd.context.initialize("--mode=cpu")
+
+sim = hoomd.context.SimulationContext()
+hoomd.option.set_notice_level(notice_level)
+
+handler = DiffusionHandler(L,rho,d1)
+handler.placeBeads()
+sigmaAB = handler.getSigmaAB()
+cutAB = handler.getCutAB()
+snapshot = handler.get_snap(sim)
+system = hoomd.init.read_snapshot(snapshot)
+
+nl = hoomd.md.nlist.tree()
+
+wca = hoomd.md.pair.lj(r_cut=cutAB, nlist=nl)
+
+wca.pair_coeff.set(['Eu'],['Eu'],epsilon=1.0,sigma=1.0,r_cut=2**(1/6.))
+wca.pair_coeff.set(['Gd'],['Gd'],epsilon=1.0,sigma=1.0,r_cut=2**(1/6.))
+wca.pair_coeff.set(['Eu'],['Gd'],epsilon=1.0,sigma=sigmaAB,r_cut=cutAB)
+
+wca.set_params(mode="shift")
+
+if not os.path.exists('./out/'):
+    os.makedirs('./out/')
+
+n =  './out/' + output +'.gsd'
+nlog = './out/' + output +'.log'
+
+d = hoomd.dump.gsd(n, period=dump_period,dynamic=["attribute","momentum"], group=hoomd.group.all(), overwrite=True)
+analyzer = hoomd.analyze.log(filename=nlog, quantities=['potential_energy', 'kinetic_energy','temperature'],
+period=log_period, header_prefix='#', overwrite=True)
+
+hoomd.md.integrate.mode_standard(dt=dt)
+nvt = hoomd.md.integrate.nvt(group=hoomd.group.all(), kT=kT, tau=tau)
+nvt.randomize_velocities(seed=42)
+hoomd.run(run_steps)
+
+print("******************************************************")
+print("Completed")
+
+
+
+
+
+
+
+
+exit(0)

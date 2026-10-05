@@ -1,0 +1,21 @@
+bargun2@kirk:~/Simulations/p_diff/03/trajs/txt_data$ python3 deep_net03_v4.py
+epoch 0, loss = 1.1227495670318604
+epoch 10, loss = 0.1094404086470604
+epoch 20, loss = 0.023679226636886597
+30 epochs in 9.27 seconds -script - v4 BatchSize=128
+epoch 0, loss = 2.5687406063079834
+epoch 10, loss = 0.5356004238128662
+epoch 20, loss = 0.05565696209669113
+30 epochs in 5.13 seconds -script - v4 BatchSize=256
+epoch 0, loss = 2.611300230026245
+epoch 10, loss = 0.6907767057418823
+epoch 20, loss = 0.1048426553606987
+30 epochs in 2.82 seconds -script - v4 BatchSize=512
+epoch 0, loss = 2.378984212875366
+epoch 10, loss = 0.764205813407898
+epoch 20, loss = 0.7589982151985168
+30 epochs in 1.78 seconds -script - v4 BatchSize=1024
+epoch 0, loss = 3.2452645301818848
+epoch 10, loss = 1.5530234575271606
+epoch 20, loss = 0.7653523683547974
+30 epochs in 1.15 seconds -script - v4 BatchSize=2048

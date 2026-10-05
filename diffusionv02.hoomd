@@ -1,0 +1,146 @@
+import numpy as np
+import sys, os
+#sys.path.insert(0,"/home/bargun2/Programs/hoomd-blue/build/hoomd-2.9.4/")
+import hoomd
+import hoomd.md
+import gsd.hoomd
+from DiffusionHandler import DiffusionHandler
+import argparse
+import time
+import gc
+import datetime
+
+"""
+October 8 2022
+
+2nd version
+- Add more arguments : run_no, runsteps, dump_steps
+- Modify the output name to be more descriptive
+- Better print info
+- Do a short equilibration before production
+"""
+
+
+parser = argparse.ArgumentParser(description="Basic run")
+non_opt = parser.add_argument_group("mandatory arguments")
+non_opt.add_argument('--rho', metavar="<float>", type=float, dest="rho", required=True, help="# density" )
+non_opt.add_argument('--kT', metavar="<float>", type=float, dest="kT", required=True, help="kT" )
+non_opt.add_argument('--run_no', metavar="<int>", type=int, dest="run_no", required=True, help="run_no" )
+non_opt.add_argument('--version', metavar="<int>", type=int, dest="version", required=True, help="the version number of the input script" )
+
+non_opt.add_argument('--run_steps', metavar="<int>", type=int, dest="run_steps", required=True, help=" - " )
+non_opt.add_argument('--dump_period', metavar="<int>", type=int, dest="dump_period", required=True, help=" - " )
+
+
+args = parser.parse_args()
+rho = args.rho
+kT = args.kT
+run_no = args.run_no
+version = args.version
+dump_period = args.dump_period
+run_steps = args.run_steps
+
+if(version < 10):
+    output = "version0%d_rho%.2f_kT%.2f_runid%d" %(version,rho,kT,run_no)
+else:
+    output = "version%d_rho%.2f_kT%.2f_runid%d" %(version,rho,kT,run_no)
+
+
+"""
+Type Eu : Tracer (A)
+Type Gd : Solvent (B)
+Input Parameters
+"""
+
+L = 15.0
+d1 = 4.0
+
+log_period = dump_period
+dt = 0.005
+tau = 1.0
+notice_level = 2
+
+current_script_name = sys.argv[0]
+now = datetime.datetime.now()
+
+print("*****************************************************")
+print("Script Running  :  %s" %current_script_name)
+print(now)
+print(" -  - - - -")
+print('version = %d' %version)
+print('run_no = %d' %run_no)
+print(" -  - - - -")
+print('rho = %.2f' %rho)
+print('kT = %.2f' %kT)
+print('run_length = %d' %run_steps)
+print('dump_period = %d' %dump_period)
+print(" -  - - - -")
+print('L = %.2f' %L)
+print('d1 = %.2f' %d1)
+print('dt = %.4f' %dt)
+print('tau = %.4f' %tau)
+print("*****************************************************")
+"""
+End of Parameters
+"""
+
+
+
+time_start = time.time()
+# context_initialize_str = "--gpu=" + str(gpu_id)
+# hoomd.context.initialize(context_initialize_str)
+hoomd.context.initialize("--mode=cpu")
+
+sim = hoomd.context.SimulationContext()
+hoomd.option.set_notice_level(notice_level)
+
+handler = DiffusionHandler(L,rho,d1)
+handler.placeBeads()
+sigmaAB = handler.getSigmaAB()
+cutAB = handler.getCutAB()
+snapshot = handler.get_snap(sim)
+system = hoomd.init.read_snapshot(snapshot)
+
+nl = hoomd.md.nlist.tree()
+
+wca = hoomd.md.pair.lj(r_cut=cutAB, nlist=nl)
+
+wca.pair_coeff.set(['Eu'],['Eu'],epsilon=1.0,sigma=1.0,r_cut=2**(1/6.))
+wca.pair_coeff.set(['Gd'],['Gd'],epsilon=1.0,sigma=1.0,r_cut=2**(1/6.))
+wca.pair_coeff.set(['Eu'],['Gd'],epsilon=1.0,sigma=sigmaAB,r_cut=cutAB)
+
+print("sigmaAB = %.3f - cutAB = %.3f"%(sigmaAB,cutAB))
+groupTracer = hoomd.group.type(name='tracer', type='Eu')
+wca.set_params(mode="shift")
+
+if not os.path.exists('./logs/'):
+    os.makedirs('./logs/')
+
+if not os.path.exists('./trajs/'):
+    os.makedirs('./trajs/')
+
+hoomd.md.integrate.mode_standard(dt=dt)
+nvt = hoomd.md.integrate.nvt(group=hoomd.group.all(), kT=kT, tau=tau)
+nvt.randomize_velocities(seed=np.random.randint(10,high=50))
+hoomd.run(2e4)
+
+n =  './trajs/' + output +'.gsd'
+nlog = './logs/' + output +'.log'
+
+d = hoomd.dump.gsd(n, period=dump_period,dynamic=["attribute","momentum"], group=groupTracer, overwrite=True)
+# d = hoomd.dump.gsd(n, period=dump_period,dynamic=["attribute","momentum"], group=hoomd.group.all(), overwrite=True)
+analyzer = hoomd.analyze.log(filename=nlog, quantities=['potential_energy', 'kinetic_energy','temperature'],
+period=log_period, header_prefix='#', overwrite=True)
+
+hoomd.run(run_steps)
+
+print("**************  Completed   ***************************")
+
+
+
+
+
+
+
+
+exit(0)

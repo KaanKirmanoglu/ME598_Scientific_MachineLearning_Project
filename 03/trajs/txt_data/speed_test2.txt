@@ -1,0 +1,161 @@
+bargun2@kirk:~/Simulations/p_diff/03/trajs/txt_data$ python3 deep_net03_v3.py
+epoch 0, loss = 0.6279332637786865
+epoch 10, loss = 0.1705641746520996
+epoch 20, loss = 0.04702641814947128
+30 epochs in 17.09 seconds -script - v3 BatchSize=128 - NumWorker=0 - pin memory=1
+epoch 0, loss = 0.6701583862304688
+epoch 10, loss = 0.14938782155513763
+epoch 20, loss = 0.024522362276911736
+30 epochs in 15.56 seconds -script - v3 BatchSize=128 - NumWorker=0 - pin memory=0
+epoch 0, loss = 0.9807305335998535
+epoch 10, loss = 0.08009375631809235
+epoch 20, loss = 0.027323510497808456
+30 epochs in 17.89 seconds -script - v3 BatchSize=128 - NumWorker=1 - pin memory=1
+epoch 0, loss = 1.0841959714889526
+epoch 10, loss = 0.2078913450241089
+epoch 20, loss = 0.023478195071220398
+30 epochs in 19.54 seconds -script - v3 BatchSize=128 - NumWorker=1 - pin memory=0
+epoch 0, loss = 0.7439132928848267
+epoch 10, loss = 0.2676640748977661
+epoch 20, loss = 0.01659788005053997
+30 epochs in 19.09 seconds -script - v3 BatchSize=128 - NumWorker=2 - pin memory=1
+epoch 0, loss = 0.7941941618919373
+epoch 10, loss = 0.07290657609701157
+epoch 20, loss = 0.03298233449459076
+30 epochs in 21.94 seconds -script - v3 BatchSize=128 - NumWorker=2 - pin memory=0
+epoch 0, loss = 0.6692478656768799
+epoch 10, loss = 0.14423957467079163
+epoch 20, loss = 0.034096647053956985
+30 epochs in 21.22 seconds -script - v3 BatchSize=128 - NumWorker=4 - pin memory=1
+epoch 0, loss = 0.7673400640487671
+epoch 10, loss = 0.12694403529167175
+epoch 20, loss = 0.03992960602045059
+30 epochs in 22.87 seconds -script - v3 BatchSize=128 - NumWorker=4 - pin memory=0
+epoch 0, loss = 0.739791989326477
+epoch 10, loss = 0.28432661294937134
+epoch 20, loss = 0.04760972410440445
+30 epochs in 23.51 seconds -script - v3 BatchSize=128 - NumWorker=6 - pin memory=1
+epoch 0, loss = 0.956535816192627
+epoch 10, loss = 0.09075825661420822
+epoch 20, loss = 0.018005654215812683
+30 epochs in 25.53 seconds -script - v3 BatchSize=128 - NumWorker=6 - pin memory=0
+epoch 0, loss = 2.137648344039917
+epoch 10, loss = 0.18895785510540009
+epoch 20, loss = 0.015655776485800743
+30 epochs in 14.21 seconds -script - v3 BatchSize=256 - NumWorker=0 - pin memory=1
+epoch 0, loss = 1.3139137029647827
+epoch 10, loss = 0.30242490768432617
+epoch 20, loss = 0.024272887036204338
+30 epochs in 12.31 seconds -script - v3 BatchSize=256 - NumWorker=0 - pin memory=0
+epoch 0, loss = 1.6014008522033691
+epoch 10, loss = 0.35420235991477966
+epoch 20, loss = 0.029267316684126854
+30 epochs in 14.66 seconds -script - v3 BatchSize=256 - NumWorker=1 - pin memory=1
+epoch 0, loss = 2.8490569591522217
+epoch 10, loss = 0.17912942171096802
+epoch 20, loss = 0.07616238296031952
+30 epochs in 15.53 seconds -script - v3 BatchSize=256 - NumWorker=1 - pin memory=0
+epoch 0, loss = 2.77345609664917
+epoch 10, loss = 0.45707640051841736
+epoch 20, loss = 0.035010240972042084
+30 epochs in 16.19 seconds -script - v3 BatchSize=256 - NumWorker=2 - pin memory=1
+epoch 0, loss = 1.508664846420288
+epoch 10, loss = 0.30904680490493774
+epoch 20, loss = 0.09827490895986557
+30 epochs in 16.68 seconds -script - v3 BatchSize=256 - NumWorker=2 - pin memory=0
+epoch 0, loss = 1.8969910144805908
+epoch 10, loss = 0.22295412421226501
+epoch 20, loss = 0.04898860305547714
+30 epochs in 18.40 seconds -script - v3 BatchSize=256 - NumWorker=4 - pin memory=1
+epoch 0, loss = 3.2060000896453857
+epoch 10, loss = 0.4890507459640503
+epoch 20, loss = 0.11442045867443085
+30 epochs in 18.41 seconds -script - v3 BatchSize=256 - NumWorker=4 - pin memory=0
+epoch 0, loss = 2.956860303878784
+epoch 10, loss = 0.2259817123413086
+epoch 20, loss = 0.037444330751895905
+30 epochs in 20.74 seconds -script - v3 BatchSize=256 - NumWorker=6 - pin memory=1
+epoch 0, loss = 2.1647956371307373
+epoch 10, loss = 0.6515710353851318
+epoch 20, loss = 0.6622533798217773
+30 epochs in 21.23 seconds -script - v3 BatchSize=256 - NumWorker=6 - pin memory=0
+epoch 0, loss = 2.9105570316314697
+epoch 10, loss = 0.5746358036994934
+epoch 20, loss = 0.08611205220222473
+30 epochs in 14.85 seconds -script - v3 BatchSize=512 - NumWorker=0 - pin memory=1
+epoch 0, loss = 2.9179253578186035
+epoch 10, loss = 0.7138878107070923
+epoch 20, loss = 0.10326410830020905
+30 epochs in 11.76 seconds -script - v3 BatchSize=512 - NumWorker=0 - pin memory=0
+epoch 0, loss = 2.9545323848724365
+epoch 10, loss = 0.5329945683479309
+epoch 20, loss = 0.0871148630976677
+30 epochs in 13.46 seconds -script - v3 BatchSize=512 - NumWorker=1 - pin memory=1
+epoch 0, loss = 3.691582441329956
+epoch 10, loss = 0.5946665406227112
+epoch 20, loss = 0.0813927948474884
+30 epochs in 13.27 seconds -script - v3 BatchSize=512 - NumWorker=1 - pin memory=0
+epoch 0, loss = 2.492882490158081
+epoch 10, loss = 0.6412118673324585
+epoch 20, loss = 0.07473315298557281
+30 epochs in 14.09 seconds -script - v3 BatchSize=512 - NumWorker=2 - pin memory=1
+epoch 0, loss = 3.372096061706543
+epoch 10, loss = 0.5405952334403992
+epoch 20, loss = 0.07933549582958221
+30 epochs in 14.29 seconds -script - v3 BatchSize=512 - NumWorker=2 - pin memory=0
+epoch 0, loss = 2.8486006259918213
+epoch 10, loss = 0.7570672035217285
+epoch 20, loss = 0.7416853904724121
+30 epochs in 16.49 seconds -script - v3 BatchSize=512 - NumWorker=4 - pin memory=1
+epoch 0, loss = 2.6546874046325684
+epoch 10, loss = 0.5496824383735657
+epoch 20, loss = 0.1115657165646553
+30 epochs in 16.40 seconds -script - v3 BatchSize=512 - NumWorker=4 - pin memory=0
+epoch 0, loss = 2.5361344814300537
+epoch 10, loss = 0.528636634349823
+epoch 20, loss = 0.1291714608669281
+30 epochs in 19.77 seconds -script - v3 BatchSize=512 - NumWorker=6 - pin memory=1
+epoch 0, loss = 3.045654535293579
+epoch 10, loss = 0.6317027807235718
+epoch 20, loss = 0.1681552678346634
+30 epochs in 19.29 seconds -script - v3 BatchSize=512 - NumWorker=6 - pin memory=0
+epoch 0, loss = 3.438985586166382
+epoch 10, loss = 0.7647123336791992
+epoch 20, loss = 0.4130326509475708
+30 epochs in 14.50 seconds -script - v3 BatchSize=1024 - NumWorker=0 - pin memory=1
+epoch 0, loss = 3.0944981575012207
+epoch 10, loss = 0.7382357120513916
+epoch 20, loss = 0.49752840399742126
+30 epochs in 10.70 seconds -script - v3 BatchSize=1024 - NumWorker=0 - pin memory=0
+epoch 0, loss = 2.6527442932128906
+epoch 10, loss = 0.8015154004096985
+epoch 20, loss = 0.40618884563446045
+30 epochs in 13.50 seconds -script - v3 BatchSize=1024 - NumWorker=1 - pin memory=1
+epoch 0, loss = 2.463555097579956
+epoch 10, loss = 0.7957277297973633
+epoch 20, loss = 0.5572535991668701
+30 epochs in 13.51 seconds -script - v3 BatchSize=1024 - NumWorker=1 - pin memory=0
+epoch 0, loss = 3.438713312149048
+epoch 10, loss = 0.7943097949028015
+epoch 20, loss = 0.33764684200286865
+30 epochs in 15.50 seconds -script - v3 BatchSize=1024 - NumWorker=2 - pin memory=1
+epoch 0, loss = 3.286607503890991
+epoch 10, loss = 0.7416331768035889
+epoch 20, loss = 0.5605446696281433
+30 epochs in 13.85 seconds -script - v3 BatchSize=1024 - NumWorker=2 - pin memory=0
+epoch 0, loss = 3.349970579147339
+epoch 10, loss = 0.7333387136459351
+epoch 20, loss = 0.3798503279685974
+30 epochs in 19.22 seconds -script - v3 BatchSize=1024 - NumWorker=4 - pin memory=1
+epoch 0, loss = 2.8797829151153564
+epoch 10, loss = 0.8022854924201965
+epoch 20, loss = 0.4033861458301544
+30 epochs in 16.38 seconds -script - v3 BatchSize=1024 - NumWorker=4 - pin memory=0
+epoch 0, loss = 3.1012868881225586
+epoch 10, loss = 0.7490823268890381
+epoch 20, loss = 0.5268166661262512
+30 epochs in 22.18 seconds -script - v3 BatchSize=1024 - NumWorker=6 - pin memory=1
+epoch 0, loss = 2.817549705505371
+epoch 10, loss = 0.7674291133880615
+epoch 20, loss = 0.567750871181488
+30 epochs in 19.10 seconds -script - v3 BatchSize=1024 - NumWorker=6 - pin memory=0
